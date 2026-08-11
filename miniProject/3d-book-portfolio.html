@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>MINI PROJECT NI MICK</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<audio id="bgMusic" loop>
+  <source src="Such a good duo  BEN&BEN - LIFETIME (REIMAGINED).mp3" type="audio/mpeg">
+</audio>
+
+<!--
+  BOOK STRUCTURE:
+  page-0 = Login Cover (front) / Inside-cover (back)
+  page-1 = Original Cover (front) / Inside-cover (back)
+  page-2 = About (front) / Projects (back)
+  page-3 = Work Experience (front) / Education (back)
+  page-4 = Skills (front) / Tools (back)
+  page-5 = Contact (front) / Back cover (back)
+-->
+
+<div class="scene" id="scene">
+  <div class="book" id="book">
+
+    <!-- SPINE -->
+    <div class="spine"><span class="spine-text">i miss you po</span></div>
+
+    <!-- PAGE 0 — LOGIN COVER -->
+    <div class="page page-0" id="page-0">
+      <!-- FRONT: Login Cover -->
+      <div class="face cover-face">
+        <div class="cover-frame"></div>
+        <div class="cover-frame2"></div>
+        <div class="c-avatar">
+          <img src="images/maws.png" alt="Profile">
+        </div>
+        <div class="c-name">Access Form</div>
+        <div class="c-role">Please Login</div>
+        
+        <div class="login-form">
+          <input type="text" class="login-input" id="userLogin" placeholder="First Name / KEY">
+          <button class="login-btn"  onclick="userLogin()">Continue to book</button>
+          <a href="#" id="openModal" class="forgot-link">Forgot username?</a>
+        </div>
+
+
+      </div>
+      <!-- BACK: Inside cover left -->
+      <div class="face back cover-back-face">
+        <div class="cover-back-inner">
+          <p>"Was there a lifetime waiting for us. In a world where I was yours?"</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 1 — ORIGINAL COVER -->
+    <div class="page page-1" id="page-1">
+      <!-- FRONT: Cover -->
+      <div class="face cover-face">
+        <div class="cover-frame"></div>
+        <div class="cover-frame2"></div>
+        <div class="b-avatar" id="openLetter">
+          <img src="images/embelop.svg" alt="Profile">
+        </div>
+        <div class="c-name" id="welcomeUser"> </div>
+        <div class="c-role">Different Projects</div>
+        <div class="c-loc">Semi Vibe Coded</div>
+        <div class="c-nav">
+          <div class="c-nav-item" onclick="goToPage(2,event)">Open Book <span>›</span></div>
+        </div>
+
+
+      </div>
+      <!-- BACK: Inside cover left -->
+      <div class="face back cover-back-face">
+        <div class="cover-back-inner">
+          <p>"Was there a lifetime waiting for us. In a world where I was yours?"</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 2 — ABOUT / PROJECTS -->
+    <div class="page page-2" id="page-2">
+      <!-- FRONT: About -->
+      <div class="face page-face">
+        <div class="sec-label">About Book</div>
+        <div class="about-header">
+          <div class="sm-avatar">
+            <img src="images/mouse.jfif">
+          </div>
+          <div>
+            <div class="about-name">Mini Projects Book</div>
+            <div class="about-role">HTML · CSS · JavaScript</div>
+          </div>
+        </div>
+        <p class="about-bio">This stuff showcases projects created by Mickael as part of journey in learning JavaScript and web development. Every shi in this collection was built by applying newly learned concepts to real, functional applications. Through hands-on practice and continuous experimentation, these projects reflect not only technical skills but also creativity, and a commitment to learning.</p>
+        <div class="sec-label">!!!</div>
+        <div class="proj-card">
+          <div class="proj-name">Additional</div>
+          <div class="proj-desc">Sorry not sorry, pero hindi narerecord mga progress and data niyo kasi di ko pa naaral ang DB.</div>
+          <div class="proj-tags"><span class="tag">SORRY</span><span class="tag">NOT</span><span class="tag">SORRY</span></div>
+        </div>
+        <div class="page-num page-num-right">1</div>
+      </div>
+      <!-- BACK -->
+      <div class="face back page-face right-page">
+        <div class="sec-label">My Projects</div>
+        <div class="proj-card">
+          <div class="proj-name">Weather Dashboard</div>
+          <div class="proj-desc">Real-time weather with charts and location search.</div>
+          <div class="proj-tags"><span class="tag">React</span><span class="tag">OpenWeather API</span></div>
+        </div>
+        <div class="proj-card">
+          <div class="proj-name">Blog CMS</div>
+          <div class="proj-desc">Headless CMS with markdown editor and image upload.</div>
+          <div class="proj-tags"><span class="tag">Next.js</span><span class="tag">Contentful</span></div>
+        </div>
+        <div class="proj-card">
+          <div class="proj-name">Chat App</div>
+          <div class="proj-desc">Real-time messaging with rooms and file sharing.</div>
+          <div class="proj-tags"><span class="tag">Socket.io</span><span class="tag">Express</span></div>
+        </div>
+        <div class="page-num page-num-left">2</div>
+      </div>
+    </div>
+
+    <!-- PAGE 3 — WORK / EDUCATION -->
+    <div class="page page-3" id="page-3">
+      <!-- FRONT: Work Experience -->
+      <div class="face page-face">
+        <div class="sec-label">Work Experience</div>
+        <div class="exp-item">
+          <div class="exp-title">Senior Developer — Software Pro</div>
+          <div class="exp-co">Tech Solutions Inc.</div>
+          <div class="exp-date">2022 – Present</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-title">Web Developer</div>
+          <div class="exp-co">Digital Agency PH</div>
+          <div class="exp-date">2020 – 2022</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-title">Junior Developer</div>
+          <div class="exp-co">StartupHub Manila</div>
+          <div class="exp-date">2019 – 2020</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-title">Freelance Developer</div>
+          <div class="exp-co">Self-employed</div>
+          <div class="exp-date">2018 – 2019</div>
+        </div>
+        <div class="page-num page-num-right">3</div>
+      </div>
+      <!-- BACK: Education -->
+      <div class="face back page-face right-page">
+        <div class="sec-label">Education</div>
+        <div class="exp-item">
+          <div class="exp-title">BS Computer Science</div>
+          <div class="exp-co">University of the Philippines</div>
+          <div class="exp-date">2015 – 2019</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-title">Fullstack Bootcamp</div>
+          <div class="exp-co">Zuitt Coding Bootcamp</div>
+          <div class="exp-date">2019</div>
+        </div>
+        <div class="sec-label" style="margin-top:4px;">Certifications</div>
+        <div class="exp-item">
+          <div class="exp-title">AWS Solutions Architect</div>
+          <div class="exp-co">Amazon Web Services</div>
+          <div class="exp-date">2023</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-title">Meta Front-End Developer</div>
+          <div class="exp-co">Meta / Coursera</div>
+          <div class="exp-date">2022</div>
+        </div>
+        <div class="page-num page-num-left">4</div>
+      </div>
+    </div>
+
+    <!-- PAGE 4 — SKILLS / TOOLS -->
+    <div class="page page-4" id="page-4">
+      <!-- FRONT: Skills -->
+      <div class="face page-face" id="skills-face">
+        <div class="sec-label">Technical Skills</div>
+        <div class="skill-row">
+          <div class="skill-hdr"><span>HTML / CSS</span><span>95%</span></div>
+          <div class="skill-track"><div class="skill-fill" data-w="0.95"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-hdr"><span>JavaScript</span><span>90%</span></div>
+          <div class="skill-track"><div class="skill-fill" data-w="0.90"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-hdr"><span>React / Vue</span><span>85%</span></div>
+          <div class="skill-track"><div class="skill-fill" data-w="0.85"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-hdr"><span>Node.js</span><span>80%</span></div>
+          <div class="skill-track"><div class="skill-fill" data-w="0.80"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-hdr"><span>SQL / MongoDB</span><span>75%</span></div>
+          <div class="skill-track"><div class="skill-fill" data-w="0.75"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-hdr"><span>Python</span><span>70%</span></div>
+          <div class="skill-track"><div class="skill-fill" data-w="0.70"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-hdr"><span>TypeScript</span><span>80%</span></div>
+          <div class="skill-track"><div class="skill-fill" data-w="0.80"></div></div>
+        </div>
+        <div class="page-num page-num-right">5</div>
+      </div>
+      <!-- BACK: Tools -->
+      <div class="face back page-face right-page">
+        <div class="sec-label">Tools & Tech</div>
+        <div class="tool-grid">
+          <span class="chip">Git / GitHub</span>
+          <span class="chip">Docker</span>
+          <span class="chip">Figma</span>
+          <span class="chip">AWS</span>
+          <span class="chip">Vite</span>
+          <span class="chip">Tailwind CSS</span>
+          <span class="chip">Linux</span>
+          <span class="chip">REST APIs</span>
+          <span class="chip">GraphQL</span>
+          <span class="chip">Jest</span>
+          <span class="chip">Webpack</span>
+          <span class="chip">Vercel</span>
+          <span class="chip">Netlify</span>
+          <span class="chip">Postman</span>
+          <span class="chip">VS Code</span>
+        </div>
+        <div class="sec-label" style="margin-top:8px;">Languages</div>
+        <div class="tool-grid">
+          <span class="chip">🇵🇭 Filipino</span>
+          <span class="chip">🇺🇸 English</span>
+        </div>
+        <div class="page-num page-num-left">6</div>
+      </div>
+    </div>
+
+    <!-- PAGE 5 — CONTACT / BACK -->
+    <div class="page page-5" id="page-5">
+      <!-- FRONT: Contact -->
+      <div class="face page-face">
+        <div class="sec-label">Get In Touch</div>
+        <div class="contact-row">
+          <div class="ci"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+          john.santos@email.com
+        </div>
+        <div class="contact-row">
+          <div class="ci"><svg viewBox="0 0 24 24"><path d="M20 10.999h2C22 5.869 18.127 2 12.99 2v2C17.052 4 20 6.943 20 10.999z"/><path d="M13 8c2.103 0 3 .897 3 3h2c0-3.225-1.775-5-5-5v2zm3.422 5.443a1.001 1.001 0 0 0-1.391.043l-2.393 2.461c-.576-.11-1.734-.471-2.926-1.66-1.192-1.193-1.553-2.354-1.66-2.926l2.459-2.394a1 1 0 0 0 .043-1.391L6.859 3.513a1 1 0 0 0-1.391-.087l-2.17 1.861a1 1 0 0 0-.29.649c-.015.25-.301 6.172 4.291 10.766C11.305 20.707 16.323 21 17.705 21c.202 0 .326-.006.359-.008a.992.992 0 0 0 .648-.291l1.86-2.171a1 1 0 0 0-.085-1.39l-4.065-3.697z"/></svg></div>
+          +63 917 555 0123
+        </div>
+        <div class="contact-row">
+          <div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg></div>
+          github.com/johnsantos
+        </div>
+        <div class="contact-row">
+          <div class="ci"><svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></div>
+          linkedin.com/in/johnsantos
+        </div>
+        <div class="avail">
+          <div class="avail-t">✓ Available for freelance</div>
+          <div class="avail-s">Open to projects & collaborations</div>
+        </div>
+        <div class="page-num page-num-right">7</div>
+      </div>
+      <!-- BACK: Back cover inside -->
+      <div class="face back" style="background:linear-gradient(160deg,#1a2e5a,#0d1e3a);display:flex;align-items:center;justify-content:center;">
+        <div style="text-align:center;padding:20px;">
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--gold);margin-bottom:8px;">JS</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.25);letter-spacing:3px;text-transform:uppercase;">Thank You</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /book -->
+
+  <div class="book-shadow"></div>
+
+  <!-- NAV ARROWS -->
+  <div class="nav-arrows">
+    <button class="arr-btn" id="btn-prev" onclick="prevPage()">← Prev</button>
+    <span class="page-indicator" id="pg-indicator">Login</span>
+    <button class="arr-btn" id="btn-next" onclick="nextPage()">Next →</button>
+  </div>
+
+</div><!-- /scene -->
+
+  <!-- MODAL — outside book so it renders over everything -->
+  <div class="modal" id="forgotModal">
+    <div class="modal-inner">
+      <h2>BOOK ASSISTANT</h2>
+      <span>Oh, you forgot your name? Then go ask your mommah, kiddo.</span>
+      <span><a target="_blank" href="https://m.me/meckmeckmick">Click here</a> and send me a message on Messenger so I can give you the master key or add your name to the access list.</span>
+      <button class="got">Got It</button>
+    </div>
+  </div>
+<div id="letterModal" class="letModal">
+   <div style="display:flex; flex-direction:column; align-items:center; gap:0;">
+  <p id="userLetter" class="letter">
+      
+        </p>
+
+        <button id="closeLetter">
+            Close
+        </button>
+</div>
+</div>
+<script src="index.js"></script>
+</body>
+</html>
