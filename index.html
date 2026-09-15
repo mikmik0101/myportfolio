@@ -48,7 +48,7 @@
           <p class="welcome-sub">No account. No password. Anyone is welcome.</p>
           <form class="welcome-form" id="welcomeForm">
             <label class="sr-only" for="visitorName">Your name</label>
-            <input type="text" class="neu-input" id="visitorName" placeholder="e.g. Nick" autocomplete="name" maxlength="40">
+            <input type="text" class="neu-input" id="visitorName" placeholder="e.g. Mick" autocomplete="name" maxlength="40">
             <button type="submit" class="neu-btn neu-btn-primary">Continue →</button>
           </form>
           <p class="welcome-hint">You'll get a small greeting — the book is about my work.</p>
@@ -235,12 +235,25 @@
     <div class="book-shadow" aria-hidden="true"></div>
 
     <nav class="nav-arrows" aria-label="Book navigation">
-      <button type="button" class="neu-btn nav-btn" id="btnPrev">← Prev</button>
       <span class="page-indicator" id="pageIndicator" role="status">Welcome</span>
-      <button type="button" class="neu-btn nav-btn" id="btnNext">Next →</button>
+      <div class="nav-btn-row">
+        <button type="button" class="neu-btn nav-btn" id="btnPrev">← Prev</button>
+        <button type="button" class="neu-btn nav-btn" id="btnNext">Next →</button>
+      </div>
       <span class="swipe-hint" id="swipeHint" aria-hidden="true">Swipe ← → to turn the page</span>
     </nav>
   </div>
+</div>
+
+<!-- Section jump menu: same targets on mobile + desktop, sequential flips -->
+<button type="button" class="neu-btn menu-toggle" id="menuToggle" aria-label="Open section menu" aria-expanded="false" aria-controls="menuPanel">☰</button>
+<div class="menu-panel" id="menuPanel" role="menu" aria-label="Book sections" hidden>
+  <button type="button" class="menu-item" data-leaf="1" data-face="2">Home</button>
+  <button type="button" class="menu-item" data-leaf="2" data-face="4">About</button>
+  <button type="button" class="menu-item" data-leaf="3" data-face="5">Skills</button>
+  <button type="button" class="menu-item" data-leaf="4" data-face="7">Projects</button>
+  <button type="button" class="menu-item" data-leaf="6" data-face="11">Education</button>
+  <button type="button" class="menu-item" data-leaf="7" data-face="13">Contact</button>
 </div>
 
 <script src="index.js"></script>

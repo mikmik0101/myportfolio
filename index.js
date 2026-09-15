@@ -226,7 +226,8 @@ function renderContacts() {
       } else {
         a.href = value;
       }
-      label.textContent = value;
+      /* platform name only — the URL stays in href, never in visible text */
+      label.textContent = row[3];
     } else {
       a.href = '#';
       a.classList.add('is-soon');
@@ -274,8 +275,7 @@ function updateIndicator() {
     }
     if (prev) prev.disabled = isLocked() || mobilePos === 0;
     if (next) next.disabled = isLocked() || mobilePos === M_TOTAL - 1;
-  } else {
-    if (el) {
+  } else {    if (el) {
       var n = String(current + 1).padStart(2, '0');
       var t = String(TOTAL).padStart(2, '0');
       el.textContent = labels[current] + ' · ' + n + ' / ' + t;
@@ -283,6 +283,7 @@ function updateIndicator() {
     if (prev) prev.disabled = isLocked() || current === 0;
     if (next) next.disabled = isLocked() || current === TOTAL - 1;
   }
+  markMenuActive();
 }
 
 /* Desktop leaf flip. Guarded: locked book never leaves face 0. */
@@ -388,12 +389,16 @@ function mNext() { mGo(mobilePos + 1, 'next'); }
 function mPrev() { mGo(mobilePos - 1, 'prev'); }
 
 function nextPage() {
+  stopJump();
+  closeMenu();
   if (isMobile) { mNext(); return; }
   if (isLocked()) return;
   if (current < TOTAL - 1) flipTo(current + 1);
 }
 
 function prevPage() {
+  stopJump();
+  closeMenu();
   if (isMobile) { mPrev(); return; }
   if (isLocked()) return;
   if (current > 0) flipTo(current - 1);
@@ -402,8 +407,73 @@ function prevPage() {
 /* Leaf n ↔ mobile face 2n (front of that leaf). Guarded by flipTo/mGo. */
 function goToPage(n, e) {
   if (e) e.stopPropagation();
+  stopJump();
   if (isMobile) mGo(Number(n) * 2);
   else flipTo(Number(n));
+}
+
+/* ── SECTION JUMP MENU: sequential flips through every intermediate
+   page using the same flipTo/mGo engine (no teleporting). One sequencer
+   at a time; any manual nav wins and cancels the run. */
+var jumpTimer = null;
+var jumpTarget = null; // {leaf, face}
+
+function stopJump() {
+  if (jumpTimer) { clearTimeout(jumpTimer); jumpTimer = null; }
+  jumpTarget = null;
+}
+
+function jumpPos() { return isMobile ? mobilePos : current; }
+
+function jumpTo(t) {
+  stopJump();
+  closeMenu();
+  if (!t) return;
+  if (isLocked()) return;
+  var dest = isMobile ? Number(t.face) : Number(t.leaf);
+  if (dest === jumpPos()) return; // already there
+  jumpTarget = t;
+  var tick = function () {
+    if (!jumpTarget) return;
+    var d = isMobile ? Number(jumpTarget.face) : Number(jumpTarget.leaf);
+    if (d === jumpPos() || isLocked()) { stopJump(); return; }
+    if (isMobile) {
+      if (d > mobilePos) mGo(mobilePos + 1, 'next');
+      else mGo(mobilePos - 1, 'prev');
+    } else {
+      flipTo(current + (d > current ? 1 : -1));
+    }
+    jumpTimer = setTimeout(tick, isMobile ? 380 : 330);
+  };
+  tick();
+}
+
+function isMenuOpen() {
+  var p = document.getElementById('menuPanel');
+  return !!(p && !p.hidden);
+}
+
+function setMenu(open) {
+  var p = document.getElementById('menuPanel');
+  var b = document.getElementById('menuToggle');
+  if (!p || !b) return;
+  if (open) p.removeAttribute('hidden');
+  else p.setAttribute('hidden', '');
+  b.setAttribute('aria-expanded', open ? 'true' : 'false');
+  b.textContent = open ? '✕' : '☰';
+  b.setAttribute('aria-label', open ? 'Close section menu' : 'Open section menu');
+  if (open) markMenuActive();
+}
+
+function closeMenu() { setMenu(false); }
+
+function markMenuActive() {
+  document.querySelectorAll('.menu-item').forEach(function (btn) {
+    var here = isMobile
+      ? Number(btn.getAttribute('data-face')) === mobilePos
+      : Number(btn.getAttribute('data-leaf')) === current;
+    btn.classList.toggle('active', here);
+  });
 }
 
 /* Keep desktop leaf and mobile face in sync across the breakpoint. */
@@ -481,6 +551,24 @@ document.getElementById('visitorName').addEventListener('input', function (e) {
 });
 document.getElementById('btnPrev').addEventListener('click', prevPage);
 document.getElementById('btnNext').addEventListener('click', nextPage);
+document.getElementById('menuToggle').addEventListener('click', function (e) {
+  e.stopPropagation();
+  setMenu(!isMenuOpen());
+});
+document.querySelectorAll('.menu-item').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    jumpTo({ leaf: btn.getAttribute('data-leaf'), face: btn.getAttribute('data-face') });
+  });
+});
+document.addEventListener('pointerdown', function (e) {
+  if (!isMenuOpen()) return;
+  var p = document.getElementById('menuPanel');
+  var b = document.getElementById('menuToggle');
+  if (p && !p.contains(e.target) && b && !b.contains(e.target)) closeMenu();
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && isMenuOpen()) closeMenu();
+});
 document.querySelectorAll('[data-goto]').forEach(function (btn) {
   btn.addEventListener('click', function (e) {
     goToPage(Number(btn.getAttribute('data-goto')), e);
