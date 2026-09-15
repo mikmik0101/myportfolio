@@ -428,12 +428,16 @@ html, body {
 @media (max-width: 700px) {
   :root {
     --bw: min(94vw, 430px);
-    --bh: min(82vh, 620px);
-    --bh: min(82svh, 620px);
+    /* book reserves its own nav space: pads (12+24) + nav block (~112) + gap (12) + margin */
+    --bh: min(620px, calc(100vh - 190px));
+    --bh: min(620px, calc(100svh - 190px));
     --sp: 0px;
   }
-  html, body { padding: 12px 0 132px; align-items: flex-start; }
-  .scene { width: var(--bw); height: var(--bh); }
+  html, body { padding: 12px 0 24px; align-items: flex-start; }
+  /* scene grows with content: book first, nav controls in flow below it —
+     nothing overlays page content, so View Project can never sit under the nav */
+  .scene { width: var(--bw); height: auto; display: flex; flex-direction: column; }
+  .book { height: var(--bh); flex-shrink: 0; }
   .page { left: 0; }
   .spine, .book-shadow { display: none; }
   .face { border-radius: 18px; }
@@ -521,11 +525,13 @@ html, body {
   .back-name { font-size: 14px; }
   .back-sub { font-size: 10.5px; }
 
-  /* bottom controls: indicator + Prev/Next row + hint, fixed and compact */
+  /* bottom controls live in flow below the book: indicator, Prev/Next
+     row, hint. Dedicated space — they can never cover page content. */
   .nav-arrows {
-    position: fixed; bottom: 10px; left: 0; right: 0;
-    padding: 6px 16px;
-    flex-direction: column; gap: 6px;
+    position: static;
+    margin-top: 12px;
+    padding: 0 16px;
+    flex-direction: column; gap: 6px; align-items: center;
   }
   .nav-btn-row { display: flex; gap: 10px; width: 100%; max-width: 430px; }
   .nav-arrows .nav-btn { display: block; flex: 1; min-width: 0; padding: 14px 10px; font-size: 13px; }
