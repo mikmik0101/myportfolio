@@ -259,6 +259,14 @@ html, body {
   background: var(--page);
   box-shadow: inset 4px 4px 10px var(--shadow-d), inset -4px -4px 10px var(--shadow-l);
 }
+/* Download CV: same neumorphic pill as other controls, in flow under the TOC */
+.cv-btn {
+  align-self: flex-start;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+}
+.cv-btn span { color: var(--gold); }
 
 /* ── ABOUT / SKILLS ── */
 .inset-card {
