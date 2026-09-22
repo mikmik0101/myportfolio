@@ -259,12 +259,18 @@ html, body {
   background: var(--page);
   box-shadow: inset 4px 4px 10px var(--shadow-d), inset -4px -4px 10px var(--shadow-l);
 }
-/* Download CV: same neumorphic pill as other controls, in flow under the TOC */
+/* Download CV call-to-action: intro lines + pill, centered as one group */
+.cv-cta {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 5px; text-align: center;
+  max-width: 300px; margin: 0 auto; /* comfortable side margins, natural wrap */
+}
+.cv-cta-k { font-size: 12.5px; font-weight: 500; color: var(--ink); line-height: 1.45; }
+.cv-cta-s { font-size: 11px; color: var(--muted); line-height: 1.45; }
 .cv-btn {
-  align-self: flex-start;
-  display: inline-block;
-  text-decoration: none;
-  text-align: center;
+  display: inline-block;              /* content-sized — never full width */
+  text-decoration: none; text-align: center;
+  margin-top: 3px;
 }
 .cv-btn span { color: var(--gold); }
 
@@ -478,6 +484,9 @@ html, body {
   .welcome-sub { font-size: 14px; }
   .welcome-hint { font-size: 12px; }
   .welcome-form { max-width: 300px; gap: 12px; }
+  .cv-cta { gap: 6px; max-width: min(300px, 86%); }
+  .cv-cta-k { font-size: 14.5px; }
+  .cv-cta-s { font-size: 12.5px; }
   .neu-input { font-size: 16px; padding: 16px 22px; } /* 16px stops iOS focus zoom */
   .neu-btn { font-size: 14px; padding: 15px 26px; }
   .profile-logo { width: 128px; height: 128px; border-radius: 34px; }
@@ -615,6 +624,10 @@ html, body {
   .p-title { font-size: 24px; }
   .body { font-size: 14.5px; line-height: 1.6; }
   .profile-logo { width: 104px; height: 104px; }
+  .cv-cta { gap: 4px; }
+  .cv-cta-k { font-size: 13px; }
+  .cv-cta-s { font-size: 11.5px; }
+  .cv-btn { margin-top: 1px; }
   .proj-shot { min-height: 140px; }
   .proj-desc { font-size: 14px; }
   .journey li { font-size: 13px; padding: 9px 12px 9px 30px; }
